@@ -2,12 +2,20 @@ import clsx from "clsx";
 import React from "react";
 
 interface Props {
-  btnTitle: string;
+  btnTitle?: string;
   btnColor?: "blue" | "red" | "green";
   btnSize?: "small" | "medium" | "large";
+  action?: Function;
+  type?: "button" | "submit";
 }
 
-const Button = ({ btnTitle, btnColor = "blue", btnSize = "small" }: Props) => {
+const Button = ({
+  btnTitle,
+  btnColor = "blue",
+  btnSize = "small",
+  action = () => {},
+  type = "button",
+}: Props) => {
   let variantColor: string = "",
     varianteSize: string = "";
 
@@ -35,8 +43,16 @@ const Button = ({ btnTitle, btnColor = "blue", btnSize = "small" }: Props) => {
       break;
   }
 
+  const handleClick = () => {
+    if (action) {
+      action();
+    }
+  };
+
   return (
     <button
+      type={type}
+      // onClick={handleClick}
       className={clsx(
         `inline-flex items-center ${varianteSize} text-sm font-medium text-center text-white 
         ${variantColor} rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800`
@@ -48,4 +64,3 @@ const Button = ({ btnTitle, btnColor = "blue", btnSize = "small" }: Props) => {
 };
 
 export default Button;
-// "inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";

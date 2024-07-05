@@ -1,14 +1,27 @@
 import Link from "next/link";
 import React from "react";
 import Button from "../button/Button";
+import { EnregistrementInterface } from "@/types/enregistrement";
 
 interface Props {
   title: string;
+  handleChange: (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => void;
+  enregistrement: EnregistrementInterface;
+  handleSubmit: (e: React.FormEvent) => void;
+  handleAntecedantChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const EnregistrementForm = ({
-  title = "Entrez  le titre de ce formulaire",
-}: Props) => {
+const EnregistrementForm: React.FC<Props> = ({
+  title = "Entrez le titre de ce formulaire",
+  handleChange,
+  enregistrement,
+  handleSubmit,
+  handleAntecedantChange,
+}) => {
   return (
     <div>
       <section className="bg-white dark:bg-gray-900">
@@ -16,7 +29,7 @@ const EnregistrementForm = ({
           <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
             {title}
           </h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="sm:col-span-2">
                 <label
@@ -31,7 +44,8 @@ const EnregistrementForm = ({
                   id="reference"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="N° Reference"
-                  value={""}
+                  value={enregistrement.reference}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -49,7 +63,8 @@ const EnregistrementForm = ({
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Nom"
                   required
-                  value={""}
+                  value={enregistrement.name}
+                  onChange={handleChange}
                 />
               </div>
               <div className="w-full">
@@ -65,6 +80,8 @@ const EnregistrementForm = ({
                   id="lastname"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Prénoms"
+                  value={enregistrement.lastname}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -81,6 +98,8 @@ const EnregistrementForm = ({
                   id="profession"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Profession"
+                  value={enregistrement.profession}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -97,6 +116,8 @@ const EnregistrementForm = ({
                   id="adresse"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Adresse"
+                  value={enregistrement.adresse}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -113,6 +134,8 @@ const EnregistrementForm = ({
                   id="contact"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Contacts"
+                  value={enregistrement.contact}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -129,6 +152,8 @@ const EnregistrementForm = ({
                   id="lotissement"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="Nom du lottissement"
+                  value={enregistrement.lotissement}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -144,7 +169,9 @@ const EnregistrementForm = ({
                   name="ilot"
                   id="ilot"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Ilot"
+                  placeholder="N° Ilot"
+                  value={enregistrement.ilot}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -161,6 +188,8 @@ const EnregistrementForm = ({
                   id="lot"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   placeholder="N° Lot"
+                  value={enregistrement.lot}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -169,31 +198,35 @@ const EnregistrementForm = ({
                   htmlFor="category"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Category
+                  Categorie
                 </label>
                 <select
                   id="category"
                   name="category"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  value={enregistrement.category}
+                  onChange={handleChange}
                 >
-                  <option>Choisisez la category</option>
+                  <option selected>Selectionnez la categorie</option>
+                  <option value="ATT">ATT</option>
                   <option value="ACD">ACD</option>
-                  <option value="ATT">ATT Villageoise</option>
                 </select>
               </div>
-              <div>
+              <div className="w-full">
                 <label
                   htmlFor="superficie"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Superficie (m2)
+                  Superficie
                 </label>
                 <input
                   type="number"
                   name="superficie"
                   id="superficie"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="400"
+                  placeholder="Superficie"
+                  value={enregistrement.superficie}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -202,62 +235,69 @@ const EnregistrementForm = ({
                   htmlFor="observation"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Observation
+                  Observations
                 </label>
                 <textarea
                   id="observation"
                   name="observation"
                   rows={8}
                   className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Laisser un commentaire"
+                  placeholder="Votre observation ici"
+                  value={enregistrement.observation}
+                  onChange={handleChange}
                 ></textarea>
               </div>
-              <div>
+              <div className="w-full">
                 <label
                   htmlFor="file"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Document d&apos;identité
+                  Joindre le fichier de l&apos;attestation
                 </label>
                 <input
-                  id="file"
-                  name="file"
                   type="file"
-                  className="block p-2.5 w-full text-sm text-gray-900 px-5 py-10 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                ></input>
+                  name="file"
+                  id="file"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  onChange={handleChange}
+                />
               </div>
-              <div>
+              <div className="w-full">
                 <label
                   htmlFor="isFirstBuyer"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Premier Acheteur
+                  Première main ?
                 </label>
-                <select
-                  id="isFirstBuyer"
+                <input
+                  type="text"
                   name="isFirstBuyer"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                >
-                  <option>Choisisez</option>
-                  <option value="Oui">Oui</option>
-                  <option value="Non">Non</option>
-                </select>
+                  id="isFirstBuyer"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Première main ?"
+                  value={enregistrement.isFirstBuyer}
+                  onChange={handleChange}
+                  required
+                />
               </div>
-              <h2>ANTECEDANT</h2>
-              <div className="sm:col-span-2">
+              <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+                Antécédent (Qui cède ou vend ?)
+              </h2>
+              <div className="w-full">
                 <label
-                  htmlFor="reference"
+                  htmlFor="vendeur"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Vendu par
+                  Nom complet du Vendeur
                 </label>
                 <input
                   type="text"
                   name="vendeur"
                   id="vendeur"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Nom du vendeur"
-                  required
+                  placeholder="Nom complet du Vendeur"
+                  value={enregistrement.antecedant.vendeur}
+                  onChange={handleAntecedantChange}
                 />
               </div>
               <div className="w-full">
@@ -265,15 +305,16 @@ const EnregistrementForm = ({
                   htmlFor="contactvendeur"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Contact du vendeur
+                  Contacts du Vendeur
                 </label>
                 <input
                   type="text"
                   name="contactvendeur"
-                  id="contactVendeur"
+                  id="contactvendeur"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Contact du vendeur"
-                  required
+                  placeholder="Contacts du Vendeur"
+                  value={enregistrement.antecedant.contactvendeur}
+                  onChange={handleAntecedantChange}
                 />
               </div>
               <div className="w-full">
@@ -281,31 +322,26 @@ const EnregistrementForm = ({
                   htmlFor="adresseVendeur"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Adresse du vendeur
+                  Adresse du Vendeur
                 </label>
                 <input
                   type="text"
                   name="adresseVendeur"
                   id="adresseVendeur"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                  placeholder="Adresse du vendeur"
-                  required
+                  placeholder="Adresse du Vendeur"
+                  value={enregistrement.antecedant.adresseVendeur}
+                  onChange={handleAntecedantChange}
                 />
               </div>
             </div>
-            <div className="w-full flex flex-col md:flex-row justify-between items-center mt-5">
-              <Link href="">
-                <Button
-                  btnTitle="Enregistrer"
-                  btnColor="green"
-                  btnSize="small"
-                />
-              </Link>
+            <div className="flex items-center justify-between mt-5 space-x-4">
+              <Button type="submit" btnColor="green" btnTitle="Enregistrer" />
               <Link href="/">
                 <Button
-                  btnTitle="Annuler / Retour"
+                  type="button"
                   btnColor="red"
-                  btnSize="small"
+                  btnTitle="Annuler / Retour"
                 />
               </Link>
             </div>

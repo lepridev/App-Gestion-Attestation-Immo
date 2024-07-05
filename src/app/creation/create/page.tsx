@@ -2,38 +2,75 @@
 
 import EnregistrementForm from "@/components/forms/EnregistrementForm";
 import { EnregistrementInterface } from "@/types/enregistrement";
-import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
-type Props = {};
+const CreateEnregistrement: React.FC = () => {
+  const [enregistrement, setEnregistrement] = useState<EnregistrementInterface>(
+    {
+      reference: "",
+      name: "",
+      lastname: "",
+      profession: "",
+      adresse: "",
+      contact: "",
+      lotissement: "",
+      ilot: 0,
+      lot: 0,
+      category: "",
+      superficie: 0,
+      observation: "",
+      file: "",
+      isFirstBuyer: "",
+      antecedant: {
+        vendeur: "",
+        contactvendeur: "",
+        adresseVendeur: "",
+      },
+    }
+  );
 
-const CreateEnregistrement = (props: EnregistrementInterface) => {
-  const [enregistrement, setEnregistrement] = useState({
-    reference: "",
-    name: "",
-    lastname: "",
-    profession: "",
-    adresse: "",
-    contact: "",
-    lotissement: "",
-    ilot: 0,
-    lot: 0,
-    category: "",
-    superficie: 0,
-    observation: "",
-    file: "",
-    isFirstBuyer: "",
-    antecedant: {
-      vendeur: "",
-      contactvendeur: "",
-      adresseVendeur: "",
+  const handleChange = useCallback(
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) => {
+      const { name, value } = e.target;
+      setEnregistrement((prevState) => ({
+        ...prevState,
+        [name]: value,
+      }));
     },
-  });
+    []
+  );
+
+  const handleAntecedantChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, value } = e.target;
+      setEnregistrement((prevState) => ({
+        ...prevState,
+        antecedant: {
+          ...prevState.antecedant,
+          [name]: value,
+        },
+      }));
+    },
+    []
+  );
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("enregistrement", enregistrement);
+  };
 
   return (
-    <>
-      <EnregistrementForm />
-    </>
+    <EnregistrementForm
+      title="Enregistrer une nouvelle Attestation"
+      handleChange={handleChange}
+      enregistrement={enregistrement}
+      handleSubmit={handleSubmit}
+      handleAntecedantChange={handleAntecedantChange}
+    />
   );
 };
 
