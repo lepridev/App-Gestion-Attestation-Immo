@@ -14,9 +14,7 @@ const ListeDesEnregistrement = (props: Props) => {
   const getDataFromBack = async () => {
     setLoading(true); // Début du chargement
     try {
-      const response = await getAllData(
-        "https://66887e67e0d3ee0008750be4--nouvelle-app-guide.netlify.app/api/display/alldata"
-      );
+      const response = await getAllData("/api/display/alldata");
       console.log("Données récupérées", response.data);
       setData(response.data?.data); // Met à jour les données
     } catch (error) {
