@@ -52,7 +52,7 @@ const Accueil = (props: Props) => {
       description:
         "Vous Affichez la liste complete des enregistrements dans la base de donnée",
       buttonTitle: "Afficher",
-      link: "/recaps",
+      link: "/display",
     },
   ];
   return (
