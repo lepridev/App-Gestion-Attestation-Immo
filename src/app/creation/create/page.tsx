@@ -65,7 +65,7 @@ const CreateEnregistrement: React.FC = () => {
     try {
       // const response = await axios.post("/api/creation/create", enregistrement);
       const response = await createEnregistrement(
-        "/api/creation/create",
+        "https://66887e67e0d3ee0008750be4--nouvelle-app-guide.netlify.app/api/creation/create",
         enregistrement
       );
       console.log("Enregistrement effectué avec succès:", response.data);

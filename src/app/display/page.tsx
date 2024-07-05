@@ -14,7 +14,9 @@ const ListeDesEnregistrement = (props: Props) => {
   const getDataFromBack = async () => {
     setLoading(true); // Début du chargement
     try {
-      const response = await getAllData("/api/display/alldata");
+      const response = await getAllData(
+        "https://66887e67e0d3ee0008750be4--nouvelle-app-guide.netlify.app//api/display/alldata"
+      );
       console.log("Données récupérées", response.data);
       setData(response.data?.data); // Met à jour les données
     } catch (error) {
@@ -32,7 +34,11 @@ const ListeDesEnregistrement = (props: Props) => {
 
   return (
     <div className="p-3 md:p-7">
-      <Link href={"/guide"}>
+      <Link
+        href={
+          "/https://66887e67e0d3ee0008750be4--nouvelle-app-guide.netlify.app/"
+        }
+      >
         <button
           type="submit"
           className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-600 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
